@@ -11,6 +11,7 @@ import heapq
 from seidel_tree import to_line, Segment, Line, \
     approx_above, approx_eq_above
 import poly_tree as poly
+from poly_tree import PolyTree2
 import geometric as geom
 
 
@@ -171,17 +172,17 @@ def point_cuts(pts, lines, cell_count):
 
 """
  TODO Move the poly tree algorithm over here and create a chan version of it.
- 
+
  1) Need to modify the cutting so that the test sets are still internal to each cell. In other
  words the cutting needs to be constrained to the cell above it. (done)
- 
+
  2) Change this so that we compute each cutting with a branching factor of b. This might involve
  doing a search over the cuttings.
 
-3) Test set should be computed with size 1/eps^{4/3} log^{2/3 + 2} 1/eps. Or in other 
-words the #cells * log^2(#cells). Or we could construct a sample of points of size 
+3) Test set should be computed with size 1/eps^{4/3} log^{2/3 + 2} 1/eps. Or in other
+words the #cells * log^2(#cells). Or we could construct a sample of points of size
 sqrt(#cells) * log #cells and then feed this into the dual algorithm with r = sqrt(#cells) to get the lines.
-This should scale like #cells * log #cells which is the optimal... 
+This should scale like #cells * log #cells which is the optimal...
 
 """
 
@@ -483,7 +484,6 @@ class segment_search:
 
 
 def chan_partitions2(pts, b, min_cell_size=100, c=2):
-
     n = len(pts)
     s = n / min_cell_size
 
@@ -585,10 +585,10 @@ def quadTreeSample(pts, min_cell_size=100, cell_sample_size=1):
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
     import matplotlib
-    pts = [(random.random(), random.random()) for i in range(100000)]
+    pts = [(random.random(), random.random()) for i in range(100)]
     tree = chan_partitions2(pts, b=28, min_cell_size=100)
     f, ax = plt.subplots()
-    s_pts = random.sample(pts, 10000)
+    s_pts = random.sample(pts, 10)
     x, y = zip(*pts)
     ax.scatter(x, y, marker='.')
     tree.visualize_arrangement(ax, min(x), max(x), min(y), max(y))
