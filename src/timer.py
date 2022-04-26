@@ -1,7 +1,7 @@
 import datetime
 from partitioning import *
 import random
-NUM_ITERATIONS = 3
+NUM_ITERATIONS = 1
 
 def average_time(algorithm, points):
     """call hull_algorithm on points repeatedly and return average time"""
@@ -43,10 +43,6 @@ def build_header_and_legend(option):
     print("Legend:")
     print("    n      : the number of points")
     print("    chan   : the running time of the chan algorithm (in ms)")
-
-    if option == "hullsize":
-        header.append("h")
-        print("    h      : the number of points on the convex hull")
 
     print("")
 
